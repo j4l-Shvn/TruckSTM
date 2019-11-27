@@ -1,5 +1,8 @@
 TruckSTM %%%% -- Please read the paper for full details.
 
+##RUN instructions
+This is a lightweight application now, so easiest way to run is >> python3 main.py
+
 ##Defining states###
 1> States need to be defined in the "state_defs" directory under the current working directory.
 2> Please follow the definition format from paper.
