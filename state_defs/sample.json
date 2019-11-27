@@ -1,0 +1,22 @@
+[{
+	"name": "Normal Decelerate",
+	"status": "Normal",
+	"definition": [
+	{"pgn": 65265, "da": 255, "sa": 0, "spn": 597, "pinst": [1.0], "comment": "Brakes pressed"},
+	{"pgn": 65265, "da": 255, "sa": 0, "spn": 598, "pinst": [1.0], "comment": "Cluth pressed"},
+	{"pgn": 61444, "da": 255, "sa": 0, "spn": 190, "pinst": [0.0,[0.0,2000.0]], "comment": "Low engine speed"},
+	{"pgn": 61443, "da": 255, "sa": 0, "spn": 559, "pinst": [0.0], "comment":"No-KickDown"}
+	]
+},
+{
+	"name": "Malfunction",
+	"status": "Abnormal",
+	"definition": [
+	{"pgn": 65265, "da": 255, "sa": 0, "spn": 597, "pinst": [1.0], "comment":"Brakes pressed"},
+	{"pgn": 65265, "da": 255, "sa": 0, "spn": 598, "pinst": [0.0], "comment": "Cluth pressed"},
+	{"pgn": 61444, "da": 255, "sa": 0, "spn": 190, "pinst": [0.0,[2000.0,3000.0]], "comment":"Normal engine speed"},
+	{"pgn": 61443, "da": 255, "sa": 0, "spn": 559, "pinst": [1.0], "comment": "KickDown active"},
+	{"pgn": 0, "da": 0, "sa": 11, "spn": 4191, "pinst": [[1700.0,1920.5]], "comment": "high requested torque from engine"} 
+	]
+}
+]
