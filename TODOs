@@ -1,0 +1,13 @@
+1> Add feature for multi-packet translation
+2> Separate out the interpreter module
+3> Add support for state statistic call-backs
+4> Remote mask generation to address secret J1939 interpretation on tweak or any other
+5> Input checking on the state def files -- done
+6> Add support for auto-state off if an SPN is not seen for a while:
+    Basically, each variable is in a state by itself. Together, they compose a larger operational state. Typically, the state of a vehicle is characterised by ongoing or finished states of its components. THe issue however is what happens when an SPN included in a state is not reported? Ideally the state should be considered disabled. However there can be two scenarios where an SPN may not be available.
+    a> Before a state was activated: In this case, it is fine as the state will eventually become activated if the SPN becomes available
+    b> After a state is activated:
+        At what point do we disable the state if a constituent parameter is not reported on the network? Two choices are there
+        i>  Associate the state with another SPN to indicate the period of activity of the state. This needs to be done by the state definer. E.g. Assosiating SPN1483 with TSC1 will ensure where engine control is enforced or not.
+        ii> Associate a time bound before which the SPN will be made unavailable. The constraint may be set absolute-time-in-millisec or relative-multiplication-factor-for-estimated-period. In the smart mode the period can be estimated automatically and the multiplication factor is in integral range [1,10] upto when we should wait before setting the value to available. We automatically set unavailable to be a value outside the datarange.
+

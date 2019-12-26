@@ -13,9 +13,7 @@ def generateEngineDisableAttack(input_q):
 				for i in range(8,0,-1):
 					data = data + row['B' + str(i)].strip().zfill(2)
 				time.sleep(float(row['Rel']))	
-				#print ("@"  +row['Abs'])
 				if (random.uniform(0.0, 1.0) > .8):
-					#print ("Injected..............")
 					input_q.put({'ID':'00000011', 'Data':int('000000007D000000',16)}) #0% torque command attack
 					input_q.put({'ID':'00F00400', 'Data':int('00000000007D0000',16)}) #0% torque reported by engine
 				input_q.put({'ID':row['ID'].zfill(8), 'Data':int(data,16)})
