@@ -1,5 +1,8 @@
 # general imports
-import multiprocessing as mul, signal, sys
+import multiprocessing as mul
+import signal
+import sys
+
 # import the input reader
 import input_readers.reader as reader
 
@@ -8,8 +11,6 @@ if __name__ == "__main__":
 
     config = c.ConfigParser()
     config.read('conf.cfg')
-
-    # ~ startup_file as startup
 
     # First startup the whole process
     startup_dict = __import__(config.get('Programs', 'startup').strip()).communicate(

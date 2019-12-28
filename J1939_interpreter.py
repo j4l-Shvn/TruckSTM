@@ -1,5 +1,5 @@
 # Local imports
-import binascii, sys, lib.file_io as fi
+import binascii
 
 # The pgn_h, spn + mask map
 pgn_spn_map = {}
@@ -37,6 +37,7 @@ def start_up(args):
 
 
 def communicate(in_q, out_q, args):  # args is a dictionary of whatever this module needs
+    print("Launched J1939 interpreter...")
     start_up(args)
     import lib.process as proc
     proc.io(in_q, out_q, process, "J1939_Interpreter")

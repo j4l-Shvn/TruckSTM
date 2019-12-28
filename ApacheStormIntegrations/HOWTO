@@ -1,0 +1,13 @@
+Many ways of integrating our solutions into a full server setup:
+Apache kafka, with 0 parallism is basically same as Apache Storm with 0 parallelism.
+    Both cases eat up virtual mem and at peaking at CPU usage on my (quad-core Intel(R) Core(TM) i7-2620M CPU @ 2.70GHz) laptop
+    Need to move to tweak
+
+Ideally storm is the choice. Storm offers parallelism options over kafka. Storm has poor python integration and even poor documentation. However, streamparse for python utiizes Storm's multilang support for Python and builds flexible and easy-to-configure interface. The steps to run install and run streamparse are::
+    i> pip install streamparse
+    ii> sudo apt-get install leiningen
+    iii> Download Storm (>= 0.10.0) and add the bin directory to PATH
+    iv> sparse quikcstart TruckSTM (this seems to be the only option provided by streamparse now to create a project)
+    v> CD into the project and change any filename and term related to "word" or "wordcount" to "TruckSTM" or "InComVecSec".
+    vi> Under the spouts directory add all message producing spouts and connect these to raspberry pi's on the truck network
+    vii> Bolts are the processing units, attach these to the python modules we have developed so far.

@@ -16,14 +16,10 @@ class SpnValues:
             self.intervalMaps) + "\nintervals: " + str(self.intervals))
 
 
-# ~ SpnObjects=[]
 pCount = 0
 SpnObjIndexes = {}
 parameter_state_map = {}
 state_parameter_map = {}
-
-import lib.file_io as fi
-
 
 def start_up(args):
     global SpnObjIndexes, SpnObjects, parameter_state_map, state_parameter_map, pCount
@@ -49,7 +45,7 @@ def start_up(args):
         SpnObjIndexes[spn.spnValue] = spn
 
 
-prevStates = {}  # need to store previious values
+prevStates = {}  # need to store previous values
 
 
 # Processing Messages
@@ -57,7 +53,6 @@ def process(val):
     global SpnObjIndexes, parameter_state_map, prevStates
 
     currStates = {}
-    # ~ finalStates=prevStates
     for p in val:
         try:
             SpnObject = SpnObjIndexes[p[0]]
@@ -72,7 +67,6 @@ def process(val):
 
         # Then cheking the intervals trees
         if (SpnObject.itree != {}):
-            # ~ print ("Interval: IN")
             res = SpnObject.itree.search(p[1])
             for r in res:
                 lst = SpnObject.intervalMaps[r]
@@ -90,19 +84,6 @@ def process(val):
                     state_parameter_map[s][1] = state_parameter_map[s][1] + 1
                 prevStates[s] = state_parameter_map[s]
                 currStates[s] = state_parameter_map[s]
-            # ~ if (sval==1 and val_p==0):
-            # ~ state_parameter_map[s][0][p[0]] = 1
-            # ~ state_parameter_map[s][1] = state_parameter_map[s][1] + 1
-            # ~ tup=(s[0], s[1], str(state_parameter_map[s][0]))
-            # ~ prevStates[s] = state_parameter_map[s]
-            # ~ currStates[s] = state_parameter_map[s]
-
-            # ~ if(sval==0 and val_p==1):
-            # ~ state_parameter_map[s][0][p[0]] = 0
-            # ~ state_parameter_map[s][1] = state_parameter_map[s][1] - 1
-            # ~ tup=(s[0], s[1], str(state_parameter_map[s][0]))
-            # ~ prevStates[s] = state_parameter_map[s]
-            # ~ currStates[s] = state_parameter_map[s]
 
             SpnObject.stateArray[s] = 0
     to_ret = prevStates
@@ -110,12 +91,11 @@ def process(val):
 
     if to_ret == {}:
         return None
-    # print (to_ret)
     return to_ret
 
 
 def communicate(in_q, out_q, args):  # args is a dictionary of whatever this module needs
-    print("Launched disp..")
+    print("Launched display..")
     start_up(args)
     import lib.process as proc
     proc.io(in_q, out_q, process, "indexer")

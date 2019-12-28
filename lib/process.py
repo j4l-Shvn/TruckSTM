@@ -1,5 +1,3 @@
-import multiprocessing as mul, lib.file_io as fi
-
 def io(in_q, out_q,exec_func,caller="default"):
 	while True:
 		val = in_q.get(block=True)
