@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Apply or unapply patches
+
+if [ "$1" == "patch" ]; then
+  cd src/
+	patch -i main.patch main.c
+  cd ..
+	echo "Don't delete me. Used for logic with $0." > .patched
+elif [ "$1" == "vuln" ]; then
+  # If we have been patched, revert it
+	if [ -f .patched ]; then
+    cd src/
+		patch -i main.patch -R main.c
+    cd ..
+		rm .patched
+	fi
+  # Nothing to do
+fi
