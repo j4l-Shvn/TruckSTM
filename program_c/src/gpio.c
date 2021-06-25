@@ -1,4 +1,3 @@
-
 #include "gpio.h"
 
 pin_t pinOL; // pin 46

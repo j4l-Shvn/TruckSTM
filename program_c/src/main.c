@@ -42,6 +42,7 @@ int main(int argc, char * argv[]){
     bumper = (struct Bumper*) malloc(sizeof(struct Bumper));
     init_bumper(bumper);
 
+    // TODO move into seperate file
     // Setup Address Claim variables
     // Address claim NAME (data) describing device and priority
     conf.name = 0x110409000C020040;
@@ -56,6 +57,7 @@ int main(int argc, char * argv[]){
     install_signal(SIGINT);
     install_signal(SIGALRM);
 
+    // TODO move to addr claim file
     // Send out initial address claim
     if (write(s, &conf.claim_msg, sizeof(struct can_frame)) != sizeof(struct can_frame)) {
         err(1, "could not sent initial request");
@@ -70,7 +72,7 @@ int main(int argc, char * argv[]){
     ssize_t nbytes;
     time_t now;
     uint8_t led1, led2, led3, led4;
-    clock_t report_timer = clock();
+    clock_t report_timer = clock();  // TODO remove once moved to broadcast
     double report_timer_diff;
 
     while (!conf.sig_term) {
