@@ -1,0 +1,36 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption'
+if [ ! -d build ]; then mkdir build; fi
+echo Compiling vulnerable binaries
+make -C program_c main -e TYPE=.gcc.vuln
+make[1]: Entering directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+gcc -c -Iinc -s -static -O2 src/main.c
+gcc -c -Iinc -s -static -O2 src/gpio.c
+gcc -c -Iinc -s -static -O2 src/bumper.c
+gcc -Wall -c -Iinc -s -static -O2 src/logging.c
+gcc -s -static -O2 -o ../build/program_c.gcc.vuln main.o gpio.o bumper.o logging.o
+make[1]: Leaving directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+make -C program_c clean
+make[1]: Entering directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+rm -f *.o
+make[1]: Leaving directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+make -C program_c main -e TYPE=.clang.vuln COMPILER=clang
+ 
+make[1]: Entering directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+clang -c -Iinc -s -static -O2 src/main.c
+ 
+clang -c -Iinc -s -static -O2 src/gpio.c
+clang -c -Iinc -s -static -O2 src/bumper.c
+clang -Wall -c -Iinc -s -static -O2 src/logging.c
+clang -s -static -O2 -o ../build/program_c.clang.vuln main.o gpio.o bumper.o logging.o
+make[1]: Leaving directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+ 
+make -C program_c clean
+ 
+make[1]: Entering directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+rm -f *.o
+make[1]: Leaving directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+ 
+echo Compiling all binaries
+make: Leaving directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption'
+ 

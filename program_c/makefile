@@ -1,5 +1,5 @@
-CFLAGS=-O2
-COMPILER=clang
+CFLAGS=-s -static -O2
+COMPILER=gcc
 
 all: main
 
@@ -8,11 +8,14 @@ vuln:
 	./patch_unpatch_script vuln
 	$(MAKE) main TYPE=
 
-log_testing: logging.o Evp-gcm-encrypt.o
-	$(COMPILER) $(CFLAGS) -o a.out -lcrypto logging.o Evp-gcm-encrypt.o
+main: main.o gpio.o bumper.o logging.o
+	$(COMPILER) $(CFLAGS) -o ../build/program_c${TYPE} main.o gpio.o bumper.o logging.o
 
-main: main.o gpio.o bumper.o logging.o Evp-gcm-encrypt.o
-	$(COMPILER) $(CFLAGS) -o main -lcrypto main.o gpio.o bumper.o logging.o Evp-gcm-encrypt.o
+util.o: src/util.c
+	$(COMPILER) -c -Iinc $(CFLAGS) src/util.c
+
+logging.o: src/logging.c
+	$(COMPILER) -Wall -c -Iinc $(CFLAGS) src/logging.c
 
 main.o: src/main.c
 	$(COMPILER) -c -Iinc $(CFLAGS) src/main.c
@@ -22,12 +25,6 @@ gpio.o: src/gpio.c
 
 bumper.o: src/bumper.c
 	$(COMPILER) -c -Iinc $(CFLAGS) src/bumper.c
-
-logging.o: src/logging.c
-	$(COMPILER) -Wall -c -Iinc $(CFLAGS) src/logging.c
-
-Evp-gcm-encrypt.o: src/Evp-gcm-encrypt.c
-	$(COMPILER) -Wall -c -Iinc $(CFLAGS) src/Evp-gcm-encrypt.c
 
 clean:
 	rm -f *.o

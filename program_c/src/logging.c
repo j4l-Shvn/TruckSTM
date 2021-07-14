@@ -1,141 +1,301 @@
+// #include "logging.h"
+
+// /* Globals */
+// int num_added_frames = 0;  // TODO Should be removed from global, as it is specific to an mblock's state
+// FILE * __WFD = NULL;  // TODO should be removed from global
+// int num_elements_added = 0;  // "elements" are mblocks written to a file
+// clock_t start_time;
+
+
+// /* A 192 bit key (64 * 3) */
+// unsigned char KEY[24];
+// /* A 64 bit IV */
+// unsigned char IV[8];
+
+// /* Functions */
+
+
+
+// void init_Mblock(Mblock* mblock) {
+//     // TODO make real values/explain why these defaults
+//     strcpy(mblock->generation, "CAN2");
+//     strcpy(mblock->version, "TU2");
+//     strcpy(mblock->logger_number, "12");
+//     strcpy(mblock->file_number, "123");
+//     strcpy(mblock->micro_of_sdcard, "ABC");
+//     reset_mblock(mblock);
+// }
+
+// void reset_mblock(Mblock* mblock){
+//     memset(mblock->frames, 0, (BUFFER_SIZE * sizeof(struct CAN_FRAME)));
+//     memset(mblock->rx_counts, 0, member_size(Mblock, rx_counts));  // TODO should this be reset EACH time? Seems useless then
+//     memset(mblock->can_rx_err_counts, 0, member_size(Mblock, can_rx_err_counts));
+//     memset(mblock->can_tx_err_counts, 0, member_size(Mblock, can_tx_err_counts));
+//     mblock->crc32 = 0;
+// }
+
+
+// // void crypto_setup (void) {
+// //     /* Setup key and IV for DES3 */
+// //     int key_size = sizeof(KEY);
+// //     int iv_size = sizeof(IV);
+
+// //     if (!RAND_bytes(KEY, key_size)) {
+// //         handleErrors();
+// //     }
+// //     /* A 64 bit IV */
+// //     if (!RAND_bytes(IV, iv_size)) {
+// //         handleErrors();
+// //     }
+// //     // Write out key length & key
+// //     if (fwrite(&key_size, 1, sizeof(key_size), __WFD) < 1) {
+// //         error(1, "Unable to write key size: %d", key_size);
+// //     }
+// //     if (fwrite(KEY, 1, key_size, __WFD) < 1) {
+// //         error(1, "Unable to write key to file");
+// //     }
+// //     // write out iv length & iv
+// //     if (fwrite(&iv_size, 1, sizeof(iv_size), __WFD) < 1) {
+// //         error(1, "Unable to write iv size: %d", iv_size);
+// //     }
+// //     if (fwrite(IV, 1, iv_size, __WFD) < 1) {
+// //         error(1, "Unable to write IV");
+// //     }
+// // }
+
+
+// // void new_iv (void) {
+// //     int iv_size = sizeof(IV);
+// //     if (!RAND_bytes(IV, iv_size)) {
+// //         handleErrors();
+// //     }
+// //     if (fwrite(&iv_size, 1, sizeof(iv_size), __WFD) < 1) {
+// //         error(1, "Unable to write iv size: %d", iv_size);
+// //     }
+// //     if (fwrite(IV, 1, iv_size, __WFD) < 1) {
+// //         error(1, "Unable to write IV");
+// //     }
+// // }
+
+// void logging_setup(char* log_file_name, int channel){
+//     if (RECREATE_LOG_FILE_DESCRIPTOR == 0)
+//         if ((__WFD = fopen(log_file_name, "wb")) == NULL)
+//             error(1,"Could not create descriptor for %s", log_file_name);
+//     //memcpy(rx_frame.channel, interface, strlen(interface)); 
+//     rx_frame.channel = channel;
+//     rx_frame.fracTiming = 0;//(float)1/CLOCKS_PER_SEC; //Set to a default for now
+//     //TODO change fracTiming to what it should be, a 3 byte array?? Is this required?
+//     start_time = clock();
+
+//     // Initialize Crypto
+//    // crypto_setup();
+// }
+
+// // void write_encrypted(Mblock* mblock) {
+// //     int bytes_written = 0;
+// //     // Allocate plaintext buffer, and fill with Mblock data
+// //     unsigned char *plaintext = malloc(sizeof(Mblock));
+// //     memcpy(plaintext, mblock, sizeof(Mblock));
+// //     // Allocate buffer for returning ciphertext, plus some extra bytes
+// //     unsigned char *ciphertext = malloc(sizeof(Mblock) + 16);  // TODO find better value for both des and aes
+// //     // Pass plaintext to encryption algorithm
+// //     bytes_written = encrypt(plaintext, sizeof(Mblock), KEY, IV, ciphertext);
+// //     // Write Tag_length:Value
+// //     if (fwrite(&bytes_written, sizeof(int), 1, __WFD) < 1) {
+// //         error(1, "Could not write tag length of %d to %s", bytes_written, LOG_NAME);
+// //     }
+// //     if (fwrite(ciphertext, 1, bytes_written, __WFD) < 1) {
+// //         error(1, "Could not write ciphertext of length %d to %s", bytes_written, LOG_NAME);
+// //     }
+// //     free(plaintext);
+// //     free(ciphertext);
+// //     new_iv();  // make new IV for each block
+// // }
+
+// void log_to_file(Mblock* mblock) {  // TODO fix LOG_NAME usage here and then in main
+//     if (RECREATE_LOG_FILE_DESCRIPTOR == 1){
+//         if ((__WFD = fopen(LOG_NAME, "wb")) == NULL)
+//             error(1, "Could not create descriptor for %s", LOG_NAME);
+//         if (fseek(__WFD, num_elements_added*sizeof (Mblock), SEEK_SET ))
+//             error(1, "Could not seek to append location for file %s", LOG_NAME);
+//     }
+
+//     /* Patch */
+//     //write_encrypted(mblock);
+//     printf ("%s\n", mblock->generation);
+//     if (fwrite((const void *)&mblock,sizeof (Mblock),1, __WFD) < 1){
+//         error(1,"Could not log CAN data");
+//     }
+
+//     if (FLUSH_AT_RUNTIME == 1){
+//         if (fflush(__WFD)){
+//             error(1,"Could not flush CAN data log");
+//         }
+//     }
+
+//     if (RECREATE_LOG_FILE_DESCRIPTOR == 1){
+//         fclose(__WFD);
+//     }
+//     num_elements_added++;
+// }
+
+// void do_log(Mblock* mblock, struct can_frame read_frame) {  // TODO move rx to param to arg and not cross file global
+//     // Copy the CAN info into an RX frame
+//     rx_frame.canID = read_frame.can_id;
+//     memset(rx_frame.data, 0xff, 8);
+//     memcpy(rx_frame.data,read_frame.data,8);
+//     rx_frame.dlc = read_frame.can_dlc;
+//     rx_frame.timestamp = (unsigned)time(NULL);
+//     rx_frame.systemTiming = (double)(clock() - start_time) / CLOCKS_PER_SEC;
+
+//     // Copy the RXframe data into the MBLOCK array
+//     memcpy(&mblock->frames[num_added_frames], &rx_frame, sizeof (struct CAN_FRAME));
+//     mblock->rx_counts[rx_frame.channel]++;
+//     //TODO error frame counts to be increased
+
+//     num_added_frames++;
+//     if (num_added_frames >= BUFFER_SIZE){
+//         //Update CRC
+//         crc32(mblock, sizeof (Mblock), &mblock->crc32);
+//         // Dump into log
+//         log_to_file(mblock);
+//         // Refresh
+//         reset_mblock(mblock);
+//         num_added_frames = 0;
+//         printf("Wrote to file\n");  // TODO remove from release
+//     }
+// }
+
+
+// void terminate_logging_gracefully(Mblock* mblock){
+//     log_to_file(mblock);
+//     if (fflush(__WFD)){
+//         error(1,"Could not flush to file");
+//     }
+
+//     if (RECREATE_LOG_FILE_DESCRIPTOR == 1)
+//         fclose(__WFD);
+// }
+
 #include "logging.h"
 
-void init_logging(struct Logger* logger) {
-    logger->fd = open("/tmp/challenge05.log", O_RDWR | O_CREAT | O_TRUNC, 0666);
-    logger->ID = 1;
-    logger->pos = 0;
-    logger->buffer = malloc(MAX_BUFF);
-    logger->buffer_index = 0;
-    logger->iv = (unsigned char *)"0123456789012345";
-    memcpy(logger->key, (unsigned char *)"01234567890123456789012345678901", 32);
+/* Global temps */
+long num_added_frames = 0;
+FILE * wfd = NULL;
+int num_elements_added = 0;
+struct MBlock mblock = {
+        . generation = "CAN2",
+        . version = "TU2",
+        . logger_number = "12",
+        . file_number = "123",
+        . micro_of_sdcard = "ABC"
+};
+
+///* A 192 bit key (64 * 3) */
+//unsigned char KEY[24];
+///* A 64 bit IV */
+//unsigned char IV[8];
+
+/* Supporting functions */
+
+//FILE * __WFD = NULL;  // TODO should be removed from global
+
+/* The CRC functions are obtained from http://home.thep.lu.se/~bjorn/crc/
+ * This is siply becasue it is better this is a simplitic (possibly non-critical)
+ * method and using linked headers like zlib that may not be installed on the BB
+ * may not be worth it.
+ */
+uint32_t crc32_for_byte(uint32_t r) {
+    for(int j = 0; j < 8; ++j)
+        r = (r & 1? 0: (uint32_t)0xEDB88320L) ^ r >> 1;
+    return r ^ (uint32_t)0xFF000000L;
 }
 
-void kill_logging(struct Logger* logger) {
-    flush_buffer(logger);
-    close(logger->fd);
-    free(logger);
+void crc32(const void *data, size_t n_bytes, uint32_t* crc) {
+    static uint32_t table[0x100];
+    if(!*table)
+        for(size_t i = 0; i < 0x100; ++i)
+            table[i] = crc32_for_byte(i);
+    for(size_t i = 0; i < n_bytes; ++i)
+        *crc = table[(uint8_t)*crc ^ ((uint8_t*)data)[i]] ^ *crc >> 8;
 }
 
-
-// The **main** function of this file. Will take in a CAN frame and call other functions to transform and log the
-// data. (CAN frame in) -> (Transform data) -> (Write to buffer system)
-void log_can(struct Logger* logger, unsigned char frame[], uint8_t size, uint32_t j1939_id) {
-    // Meta Data
-    // Make a string with ID and date
-    char id_date_buff[100];
-    time_t now;
-    time(&now);
-    int meta_size = snprintf(id_date_buff, 50, "%i: %s:", logger->ID, ctime(&now));
-    id_date_buff[meta_size - 2] = 0x20;  // remove newline
-    logger->ID++;
-    // Create new memory pointer and copy CAN frame just after our meta-data string
-    unsigned char* data = malloc(size + meta_size);  // +1 for newline
-    memcpy(data, id_date_buff, meta_size);
-    memcpy(data+meta_size, frame, size);
-    size = size + meta_size + 1;
-    data[size - 2] = 0x0A;
-    // Encrypt the data
-    unsigned char* ciphertext = malloc(size*2);  // No idea how much larger this should be from plaintext
-    unsigned char tag[16];
-    unsigned char* additional = (unsigned char*)"We won't use this";
-    int ciphertext_len;
-    ciphertext_len = gcm_encrypt(data, size,
-                                additional, 0,
-                                logger->key,
-                                logger->iv, IV_LEN,
-                                ciphertext, tag);
-
-    // Allocate hex conversion buffer  // TODO This part could probably be removed, just make the log file binary
-    //int hex_length;
-    //char* hex_dump = convert_to_hex(data, size, &hex_length);
-
-    // Write out the buffer
-    write_buffer(logger, (char *)data, size - 1);  // remove null term from file write
-    free(data);
-    //free(hex_dump);
+void reset_mblock(){
+    memset(mblock.frames, 0, BUFFER_SIZE*sizeof(struct CAN_FRAME));
+    memset(mblock.rx_counts, 0, sizeof (mblock.rx_counts));
+    memset(mblock.rx_counts, 0, sizeof (mblock.can_rx_err_counts));
+    memset(mblock.rx_counts, 0, sizeof (mblock.can_tx_err_counts));
+    mblock.crc32 = 0;
+    num_added_frames = 0;
 }
 
-
-/** @brief This function will take an unsigned char buffer and convert it to a hexadecimal representation. It will
-  *        append a null terminator to the resulting string
-  *
-  * @param src: This is the unsigned char buffer that stores the information to be converted to hex
-  * @param src_size: How many bytes of the src buffer will be read and converted to hex
-  * @param dest_size: return parameter, the hex string size
-  * @return This function will return a char buffer with the hex string + null term
-  */
-char* convert_to_hex(unsigned char src[], int src_size, int* dest_size) {
-    // Expand by factor of 2, plus newline and end null
-    *dest_size = (src_size * 2) + 2;
-    char *dest = malloc(*dest_size);
-    for (int i = 0; i < src_size; i++){
-        sprintf(&dest[i*2], "%02x", src[i]);
+void log_to_file(){
+    if (RECREATE_LOG_FILE_DESCRIPTOR == 1){
+        if ((wfd = fopen(LOG_NAME, "wb")) == NULL)
+            error(1, "Could not create descriptor for %s", LOG_NAME);
+        if (fseek( wfd, num_elements_added*sizeof (struct MBlock), SEEK_SET ))
+            error(1, "Could not seek to append location for file %s", LOG_NAME);
     }
-    dest[*dest_size - 2] = 0x0A;  // new line
-    dest[*dest_size - 1] = 0x00;  // null
-    *dest_size = *dest_size - 1;  // TODO decide if this makes sense. Only counts data as size, null term not included
-    return dest;
+    if (fwrite((const void *)&mblock,sizeof (struct MBlock),1, wfd) < 1){
+        error(1,"Could not CANlog to file");
+    }
+    if (FLUSH_AT_RUNTIME == 1){
+        if (fflush(wfd)){
+            error(1,"Could not flush CANlog to file");
+        }
+    }
+
+    if (RECREATE_LOG_FILE_DESCRIPTOR == 1){
+        fclose(wfd);
+    }
+    num_elements_added++;
 }
 
+void loging_setup(int channel){
 
-/** @brief Pushes the data to the logging buffer. If the buffer were to fill, then flush the current buffer and write the
-  *        data to the flushed buffer.
-  *
-  * @param logger: The struct used for logging related variables
-  * @param data: char pointer to the data
-  * @param data_size: size of the data to write
-  */
-void write_buffer(struct Logger* logger, char *data, int data_size) {
-    if ((data_size < 0) || (data_size > MAX_BUFF)) {
-        // TODO write current buffer, then this data instead?
-        puts("Cannot write data!");
-        return;
-    }
-    // Check if buffer would overflow, flush if it would.
-    int updated_index = logger->buffer_index + data_size;
-    if (updated_index > MAX_BUFF) {
-        flush_buffer(logger);
-        updated_index = data_size;
-    }
-    // Push new data onto the buffer
-    memcpy(logger->buffer + logger->buffer_index, data, data_size);
-    // Update where the buffer offset is
-    logger->buffer_index = updated_index;
+    rx_frame.channel = channel;
+    rx_frame.fracTiming = 0;//(float)1/CLOCKS_PER_SEC;
+    //TODO change fracTiming to what it should be, a 3 byte array?? Is this required?
+    start_time = clock();
+
+    if (RECREATE_LOG_FILE_DESCRIPTOR == 0)
+        if ((wfd = fopen(LOG_NAME, "wb")) == NULL)
+            error(1,"Could not create descriptor for %s", LOG_NAME);
+
+    //crypto_setup();
 }
 
+void loging_handler(struct can_frame read_frame){
+    rx_frame.canID = read_frame.can_id;
+    memset(rx_frame.data, 0xff, 8);
+    memcpy(rx_frame.data,read_frame.data,8);
+    rx_frame.dlc = read_frame.can_dlc;
+    rx_frame.timestamp = (unsigned)time(NULL);
+    rx_frame.systemTiming = (double)(clock() - start_time) / CLOCKS_PER_SEC;
 
-/** @brief Function that flushes the buffer and resets the index to be 0
-  *
-  * @param logger: The struct used for logging related variables
-  */
-void flush_buffer(struct Logger* logger) {  // didn't like this being inlined during linking?
-    write(logger->fd, logger->buffer, logger->buffer_index);
-    // [DEV] Could add free then malloc here to increase processing
-    // [DEV] Could also zero out memory here
-    logger->buffer_index = 0;
+    memcpy(&mblock.frames[num_added_frames], &rx_frame, sizeof (rx_frame));
+    mblock.rx_counts[rx_frame.channel]++;
+    //TODO error frame counts to be increased
+
+    num_added_frames++;
+
+    if (num_added_frames >= BUFFER_SIZE){
+        //Update CRC
+        crc32(&mblock, sizeof (mblock), &mblock.crc32);
+        // Dump into log
+        log_to_file(&mblock, sizeof (mblock));
+        // Refresh
+        reset_mblock();
+    }
 }
 
-
-int test_logging() {
-    // example usage
-    struct Logger* logger = (struct Logger*) malloc(sizeof(struct Logger));
-    init_logging(logger);
-    unsigned char src[] = "123456789";
-    /*
-    puts("Logging 1");
-    log_can(logger, src, 10, 01);
-    puts("Logging 2");
-    log_can(logger, src, 10, 01);
-    puts("Logging 3");
-    log_can(logger, src, 10, 01);
-    puts("Logging 4");
-    log_can(logger, src, 10, 01);
-    puts("Logging 5");
-    log_can(logger, src, 10, 01);
-    */
-    for (int i = 0; i < 10; i++) {
-        log_can(logger, src, 10, 01);
+void terminate_loging_gracefully(){
+    if (num_added_frames > 0)
+        log_to_file(&mblock, sizeof (mblock));
+    if (fflush(wfd)){
+        error(1,"Could not flush to file %s", LOG_NAME);
     }
-    kill_logging(logger);
-    return 0;
+
+    if (RECREATE_LOG_FILE_DESCRIPTOR == 1)
+        fclose(wfd);
 }

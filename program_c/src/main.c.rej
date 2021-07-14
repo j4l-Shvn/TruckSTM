@@ -1,0 +1,10 @@
+*** /dev/null
+--- /dev/null
+***************
+*** 296,297
+-     if (iterations > 0xFF) {
+-         conf.current_sa = J1939_IDLE_ADDR;
+--- 296,298 -----
++     if (conf.current_sa == 71) { return; }  // we're static now
++     if (iterations > J1939_IDLE_ADDR){
++         conf.current_sa = 71;

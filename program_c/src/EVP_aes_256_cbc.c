@@ -1,39 +1,40 @@
-#include "EVP_des_ede3_cbc.h"
+// Taken from https://wiki.openssl.org/index.php/EVP_Symmetric_Encryption_and_Decryption
+#include "EVP_aes_256_cbc.h"
 
-
-int test_crypt (void)
+int test_crypto (void)
 {
-    /* Setup key and IV for DES3 */
-    /* A 192 bit key (64 * 3) */
-    unsigned char key[24];
-    if (!RAND_bytes(key, sizeof key)) {
-        handleErrors();
-    }
-    /* A 64 bit IV */
-    unsigned char iv[8];
-    if (!RAND_bytes(iv, sizeof iv )) {
-        handleErrors();
-    }
+    /*
+     * Set up the key and iv. Do I need to say to not hard code these in a
+     * real application? :-)
+     */
+
+    /* A 256 bit key */
+    unsigned char *key = (unsigned char *)"01234567890123456789012345678901";
+
+    /* A 128 bit IV */
+    unsigned char *iv = (unsigned char *)"0123456789012345";
+
     /* Message to be encrypted */
     unsigned char *plaintext =
         (unsigned char *)"The quick brown fox jumps over the lazy dog";
 
     /*
-    * Buffer for ciphertext. 8 bytes are added to the size to account for
-    * alignment.
-    */
-    unsigned char ciphertext[strlen((char *)plaintext) + 8];
+     * Buffer for ciphertext. Ensure the buffer is long enough for the
+     * ciphertext which may be longer than the plaintext, depending on the
+     * algorithm and mode.
+     */
+    unsigned char ciphertext[strlen((char *)plaintext) + 16];
 
     /* Buffer for the decrypted text */
-    unsigned char decryptedtext[strlen((char *)plaintext) + 8];
+    unsigned char decryptedtext[strlen((char *)plaintext) + 16];
 
     int decryptedtext_len, ciphertext_len;
 
     /* Encrypt the plaintext */
-    ciphertext_len = encrypt(plaintext, strlen ((char *)plaintext),
-                                 key,
-                                 iv,
-                                 ciphertext);
+    ciphertext_len = encrypt (plaintext, strlen ((char *)plaintext),
+                                key,
+                                iv,
+                                ciphertext);
 
     /* Do something useful with the ciphertext here */
     printf("Ciphertext of length %d is:\n", ciphertext_len);
@@ -81,8 +82,7 @@ int encrypt(unsigned char *plaintext, int plaintext_len,
         handleErrors();
 
     /* Initialise the encryption operation. */
-    // TODO is EVP_CIPHER_CTX_ctrl with key and iv length needed?
-    if(1 != EVP_EncryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, key, iv))
+    if(1 != EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, iv))
         handleErrors();
 
     /*
@@ -94,8 +94,8 @@ int encrypt(unsigned char *plaintext, int plaintext_len,
     ciphertext_len = len;
 
     /*
-     * Finalise the encryption. Normally ciphertext bytes may be written at
-     * this stage, but this does not occur in GCM mode
+     * Finalise the encryption. Further ciphertext bytes may be written at
+     * this stage.
      */
     if(1 != EVP_EncryptFinal_ex(ctx, ciphertext + len, &len))
         handleErrors();
@@ -122,24 +122,20 @@ int decrypt(unsigned char *ciphertext, int ciphertext_len,
         handleErrors();
 
     /* Initialise the decryption operation. */
-    if(1 != EVP_DecryptInit_ex(ctx, EVP_des_ede3_cbc(), NULL, key, iv))
+    if(1 != EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, iv))
         handleErrors();
-
-    // /* Initialise key and IV */  TODO verify this is not needed
-    // if(!EVP_DecryptInit_ex(ctx, NULL, NULL, key, iv))
-    //    handleErrors();
 
     /*
      * Provide the message to be decrypted, and obtain the plaintext output.
-     * EVP_DecryptUpdate can be called multiple times if necessary
+     * EVP_DecryptUpdate can be called multiple times if necessary.
      */
     if(1 != EVP_DecryptUpdate(ctx, plaintext, &len, ciphertext, ciphertext_len))
         handleErrors();
     plaintext_len = len;
 
     /*
-     * Finalise the decryption. A positive return value indicates success,
-     * anything else is a failure - the plaintext is not trustworthy.
+     * Finalise the decryption. Further plaintext bytes may be written at
+     * this stage.
      */
     if(1 != EVP_DecryptFinal_ex(ctx, plaintext + len, &len))
         handleErrors();

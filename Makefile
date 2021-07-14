@@ -1,5 +1,8 @@
 
-all: vuln one_liner recursive iterative
+# all: vuln one_liner recursive iterative
+# 	@echo Compiling all binaries
+
+all: vuln
 	@echo Compiling all binaries
 
 vuln:

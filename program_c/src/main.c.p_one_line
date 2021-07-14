@@ -7,8 +7,6 @@ struct conf_t conf = {
     .current_sa  = DYNAMIC_MIN
 };
 
-//Mblock* GLOBAL_MBLOCK = NULL;
-
 
 int main(int argc, char * argv[]){
     // Check parameters
@@ -29,7 +27,7 @@ int main(int argc, char * argv[]){
         printf("Failed to create socket\n");
         sleep(3000);
     }
-    printf("CAN Socket created\n");
+    printf("Socket created\n");
 
     // Init GPIO
     initialize_pins();
@@ -63,13 +61,6 @@ int main(int argc, char * argv[]){
         err(1, "could not sent initial request");
     }
     schedule_timer(250);
-
-    //Setup CAN logging
-    // Mblock* mblock = malloc(sizeof(Mblock));
-    // init_Mblock(mblock);
-    // logging_setup(LOG_NAME, LOGGER_CHANNEL);
-    // GLOBAL_MBLOCK = mblock;
-    loging_setup(LOGGER_CHANNEL);
 
     // Variables for main loop
     int nfds = s + 1;
@@ -110,8 +101,6 @@ int main(int argc, char * argv[]){
             uint8_t priority, da, sa;
             uint32_t pgn;
             parse_J1939(cf.can_id, &priority, &pgn, &da, &sa);
-            //Put logging here
-            loging_handler(cf);
 
             if (pgn == PGN_CruiseControlVehicleSpeed1) {
                 rx_brake_routine(cf.data, bumper);
@@ -171,7 +160,6 @@ int main(int argc, char * argv[]){
         /* State defunct, idle addr in use, no report */
         }
     }
-    terminate_loging_gracefully();
     fclose(log_file);
     close(s);
 }
@@ -187,7 +175,6 @@ int init_can( int *sock, char *interface ) {
     struct ifreq ifr;
     struct sockaddr_can addr;
     struct can_filter rfilter[2];
-    int ro = LOGSELF;
 
     strcpy(ifr.ifr_name, interface);
     ioctl(*sock, SIOCGIFINDEX, &ifr);  // Retrieve the interface index of the interface into ifr_ifindex
@@ -195,17 +182,15 @@ int init_can( int *sock, char *interface ) {
     addr.can_family = AF_CAN;
     addr.can_ifindex = ifr.ifr_ifindex;
 
-    /* MODIFIED from Chal 4 */
-    // // Filter setup
-    // // Challenge 03 filters
-    // rfilter[0].can_id   = 0x00FFFD00;
-    // rfilter[0].can_mask = 0x00FFFF00;
-    // // Challenge 04 filters
-    // rfilter[1].can_id   = 0x00EA0000;
-    // rfilter[1].can_mask = 0x00FF0000;
+    // Filter setup
+    // Challenge 03 filters
+    rfilter[0].can_id   = 0x00FFFD00;
+    rfilter[0].can_mask = 0x00FFFF00;
+    // Challenge 04 filters
+    rfilter[1].can_id   = 0x00EA0000;
+    rfilter[1].can_mask = 0x00FF0000;
 
-    // setsockopt(*sock, SOL_CAN_RAW, CAN_RAW_JOIN_FILTERS, &rfilter, sizeof(rfilter));
-    setsockopt(*sock, SOL_CAN_RAW, CAN_RAW_RECV_OWN_MSGS, &ro, sizeof(ro));
+    setsockopt(*sock, SOL_CAN_RAW, CAN_RAW_JOIN_FILTERS, &rfilter, sizeof(rfilter));
 
     // We're going to be listening
     if (bind(*sock,(struct sockaddr *)&addr, sizeof(addr)) < 0) {
@@ -302,7 +287,6 @@ void rx_request_routine (int sock, int destination) {
 
 /**
   * @brief  Choose a new source address from the dynamic pool, recursively
-        conf.current_sa = J1939_IDLE_ADDR;
   *
   * @param  current_index: The current index in the address pool
   * @param  iterations: The iterations past, shouldn't exceed pool size

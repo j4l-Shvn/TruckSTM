@@ -1,0 +1,9 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+gcc -c -Iinc -s -static -O2 src/main.c
+gcc -c -Iinc -s -static -O2 src/gpio.c
+gcc -c -Iinc -s -static -O2 src/bumper.c
+gcc -Wall -c -Iinc -s -static -O2 src/logging.c
+gcc -s -static -O2 -o ../build/program_c main.o gpio.o bumper.o logging.o
+make: Leaving directory '/home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c'
+ 

@@ -1,0 +1,10 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/subhojeet/MysSoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c",
+            "binaryPath": "/home/subhojeet/MysSoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c/main",
+            "binaryArgs": []
+        }
+    ]
+}

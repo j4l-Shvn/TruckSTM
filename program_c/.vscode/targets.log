@@ -1,0 +1,417 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Tue Jul 13 18:04:45 2021
+
+# Variables
+
+# 'override' directive
+GNUMAKEFLAGS := 
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+DESKTOP_SESSION = ubuntu
+# default
+.SHELLFLAGS := -c
+# environment
+XDG_SESSION_CLASS = user
+# environment
+XDG_SESSION_TYPE = x11
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+IM_CONFIG_PHASE = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# environment
+GDMSESSION = ubuntu
+# environment
+XMODIFIERS = @im=ibus
+# makefile
+CURDIR := /home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/share/code/code
+# makefile (from 'makefile', line 1)
+CFLAGS = -s -static -O2
+# environment
+JOURNAL_STREAM = 8:52516
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST :=  makefile
+# automatic
+@F = $(notdir $@)
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+# environment
+USERNAME = subhojeet
+# environment
+MANDATORY_PATH = /usr/share/gconf/ubuntu.mandatory.path
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+MANAGERPID = 2248
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# environment
+VSCODE_CWD = /home/subhojeet
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /home/subhojeet/.local/bin:/home/subhojeet/bin:/home/subhojeet/.local/bin:/home/subhojeet/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+SESSION_MANAGER = local/subhojeet-HP-ProBook-450-G6:@/tmp/.ICE-unix/2472,unix/subhojeet-HP-ProBook-450-G6:/tmp/.ICE-unix/2472
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+VSCODE_LOG_STACK = false
+# environment
+VSCODE_CRASH_REPORTER_START_OPTIONS = {"companyName":"Microsoft","productName":"VSCode","submitURL":"appcenter://code?aid=fba07a4d-84bd-4fc8-a125-9640fc8ce171&uid=08e9594a-b6c0-44cb-b450-c5bd28ea76a0&iid=08e9594a-b6c0-44cb-b450-c5bd28ea76a0&sid=08e9594a-b6c0-44cb-b450-c5bd28ea76a0","uploadToServer":true}
+# environment
+INVOCATION_ID = 451a7966d64343f6a2b4ffbabe04cffd
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+LS_COLORS = 
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 14610
+# automatic
+%F = $(notdir $%)
+# environment
+DISPLAY = :0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /home/subhojeet/MySoftware/AMP-Challenge-05-CAN-Log-Encryption/program_c
+# default
+.LOADED := 
+# environment
+SSH_AGENT_PID = 2429
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# environment
+GTK_MODULES = gail:atk-bridge
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# environment
+HOME = /home/subhojeet
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# environment
+VSCODE_CODE_CACHE_PATH = /home/subhojeet/.config/Code/CachedData/2aeda6b18e13c4f4f9edf6667158a6b8d408874b
+# environment
+LOGNAME = subhojeet
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+QT_IM_MODULE = ibus
+# environment
+SHLVL = 0
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b9211a9c-0bfb-48f6-b59b-f4e626cbd640.sock
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = subhojeet
+# makefile
+.DEFAULT_GOAL := all
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := make
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-3fd02c22-1.58.1-main.sock
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+BREAKPAD_DUMP_LOCATION = /home/subhojeet/.config/Code/exthost Crash Reports
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+GDK_BACKEND = x11
+# automatic
++F = $(notdir $+)
+# environment
+QT_ACCESSIBILITY = 1
+# environment
+DEFAULTS_PATH = /usr/share/gconf/ubuntu.default.path
+# makefile (from 'makefile', line 2)
+COMPILER = gcc
+# default
+MAKEFILES := 
+# environment
+VSCODE_BROWSER_CODE_LOADING = bypassHeatCheck
+# automatic
+<F = $(notdir $<)
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+LC_ALL = C
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+WINDOWPATH = 2
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+GJS_DEBUG_OUTPUT = stderr
+# default
+.RECIPEPREFIX := 
+# environment
+LANG = C
+# environment
+VSCODE_PID = 14610
+# variable set hash-table stats:
+# Load=104/1024=10%, Rehash=0, Collisions=14/134=10%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 66306, inode 7211311): 11 files, no impossibilities.
+
+# 11 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+src/bumper.c:
+#  Implicit rule search has been done.
+#  Last modified 2021-07-08 17:13:57.440075
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/util.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: main
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+
+logging.o: src/logging.c
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  Last modified 2021-07-13 17:29:40.031075336
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := logging.o
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := src/logging.c
+# automatic
+# | := 
+# automatic
+# < := src/logging.c
+ 
+# automatic
+# ^ := src/logging.c
+# automatic
+# ? := src/logging.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/13=8%
+#  recipe to execute (from 'makefile', line 18):
+	$(COMPILER) -Wall -c -Iinc $(CFLAGS) src/logging.c
+
+.PHONY: all vuln patch clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+bumper.o: src/bumper.c
+#  Implicit rule search has not been done.
+#  Last modified 2021-07-08 20:39:43.690242039
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 27):
+	$(COMPILER) -c -Iinc $(CFLAGS) src/bumper.c
+
+gpio.o: src/gpio.c
+#  Implicit rule search has not been done.
+#  Last modified 2021-07-08 20:39:43.646232293
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 24):
+	$(COMPILER) -c -Iinc $(CFLAGS) src/gpio.c
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  Last modified 2021-07-08 20:55:47.482545226
+#  File has been updated.
+#  Successfully updated.
+
+patch:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+src/main.c:
+#  Implicit rule search has been done.
+#  Last modified 2021-07-13 17:29:33.606991587
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 30):
+	rm -f *.o
+
+# Not a target:
+src/gpio.c:
+#  Implicit rule search has been done.
+#  Last modified 2021-07-08 17:13:57.440075
+#  File has been updated.
+#  Successfully updated.
+
+vuln:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 7):
+	if [ ! -d ../build ]; then mkdir ../build; fi
+	./patch_unpatch_script vuln
+	$(MAKE) main TYPE=
+
+# Not a target:
+src/logging.c:
+#  Implicit rule search has been done.
+#  Last modified 2021-07-13 17:31:56.928860021
+#  File has been updated.
+#  Successfully updated.
+
+main: main.o gpio.o bumper.o logging.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  recipe to execute (from 'makefile', line 12):
+	$(COMPILER) $(CFLAGS) -o ../build/program_c${TYPE} main.o gpio.o bumper.o logging.o
+
+main.o: src/main.c
+#  Implicit rule search has not been done.
+#  Last modified 2021-07-13 17:29:39.967074501
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 21):
+	$(COMPILER) -c -Iinc $(CFLAGS) src/main.c
+
+util.o: src/util.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'makefile', line 15):
+	$(COMPILER) -c -Iinc $(CFLAGS) src/util.c
+
+# files hash-table stats:
+# Load=19/1024=2%, Rehash=0, Collisions=0/50=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 27 / storage = 235 B / avg = 8 B
+# current buf: size = 8162 B / used = 235 B / count = 27 / avg = 8 B
+
+# strcache performance: lookups = 55 / hit rate = 50%
+# hash-table stats:
+# Load=27/8192=0%, Rehash=0, Collisions=1/55=2%
+# Finished Make data base on Tue Jul 13 18:04:45 2021
+
+ 

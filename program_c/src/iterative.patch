@@ -1,0 +1,28 @@
+296,298c296,305
+<     if (iterations > 0xFF) {
+<         conf.current_sa = J1939_IDLE_ADDR;
+<         return;
+---
+>     if (conf.current_sa == 71) { return; }
+>     iterations = 0;
+>     while (iterations < J1939_IDLE_ADDR) {
+>         if (avail_addrs[current_index] == F_USE) {
+>             conf.current_sa = current_index;
+>             avail_addrs[current_index] &= !F_USE;
+>             return;
+>         }
+>         current_index = (current_index + 1 == J1939_IDLE_ADDR ? 0: current_index + 1);
+>         iterations++;
+300,308c307,308
+<     if (avail_addrs[current_index] == F_USE) {
+<         conf.current_sa = current_index;
+<         avail_addrs[current_index] &= !F_USE;
+<         return;
+<     }
+<     current_index++;
+<     iterations++;
+<     current_index = current_index % J1939_IDLE_ADDR;
+<     choose_new_sa(current_index, iterations, avail_addrs);
+---
+>     // Ran out of dynamic addresses
+>     conf.current_sa = 71;

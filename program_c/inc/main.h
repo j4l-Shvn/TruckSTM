@@ -20,8 +20,10 @@
 #include "gpio.h"
 #include "bumper.h"
 #include "local_defs.h"
-// Challenge 05 new includes
+
+//#include "util.h"
 #include "logging.h"
+//#include "can.h"
 
 #define F_USE	1
 
